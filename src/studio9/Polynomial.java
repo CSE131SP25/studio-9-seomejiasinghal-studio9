@@ -11,6 +11,9 @@ public class Polynomial {
 	 */
 	public Polynomial() {
 		//FIXME
+		
+		list = new LinkedList<>();
+		
 	}
 
 	
@@ -21,6 +24,9 @@ public class Polynomial {
 	 */
 	public void addTerm(double coeff) {
 		//FIXME
+		
+		list.add(coeff);
+		
 	}
 	
 	/*
@@ -29,7 +35,19 @@ public class Polynomial {
 	 * Cx^N + Cx^N-1 + ... + Cx + C
 	 */
 	public String toString() {
-		return ""; //FIXME
+		 //FIXME
+		String poly = " ";
+		int integerDegree = list.size() - 1;
+		for (int i = 0; i < list.size(); i++) {
+			list.get(i);
+			poly = poly + "+" + list.get(i) + "x^" + integerDegree;
+			
+			integerDegree --; 
+			
+		}
+		
+		return poly;
+		
 	}
 	
 	/**
@@ -38,12 +56,53 @@ public class Polynomial {
 	 * @return value of polynomial at that x
 	 */
 	public double evaluate(double x) {
-		return 0;//FIXME
+		//return 0;//FIXME
+		
+		double poly = 0.0;
+		int integerDegree = list.size() - 1;
+		for (int i= 0; i < list.size(); i++ ) {
+			list.get(i);
+			poly = poly + list.get(i) * Math.pow(x, integerDegree); // base first then expo
+			
+			integerDegree --;
+			
+		}
+		
+		return poly;
+		
 	}
 
 	
 	public Polynomial derivative() {
-		return null;//FIXME
+		//return null;//FIXME
+		
+		Polynomial deriv = new Polynomial();
+		
+		int integerDegree = list.size() - 1;
+		for (int i = 0; i < list.size(); i ++) {
+			
+			if (integerDegree == 0) {
+				this.list.remove(i);
+			}
+			
+			if (integerDegree > 0) {
+				double m = list.get(i);
+				
+				 m = m * integerDegree;
+				 
+				 this.list.set(i, m);	
+			}
+			
+			
+			integerDegree --;
+			
+		}
+		
+		deriv.list = this.list;
+		
+		
+		return deriv;
+		
 	}
 	
 
